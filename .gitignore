@@ -1,0 +1,5 @@
+# Don't track the content of these folders.
+__pycache__/
+dist/
+build/
+code_evaluator.egg-info/
