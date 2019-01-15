@@ -2,6 +2,7 @@ import yaml
 import os
 import sys
 
+# Adding parent directory to path.
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
 from definitions import ROOT_DIR

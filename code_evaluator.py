@@ -20,7 +20,7 @@ def define_verbose_print(verbose):
         verbose_print = lambda *a : None
 
 # Function to generate paths.
-def generate_paths(path):
+def generate_path(path):
     # Getting relative path and path from string.
     rel_path = os.getcwd()
 
@@ -42,9 +42,8 @@ def generate_paths(path):
 def generate_code_statistics(path, verbose, ignore_blank_lines):
     # Defining verbose function.
     define_verbose_print(verbose)
-
     # Path to read stored in path.
-    path, rel_path = generate_paths(path)
+    path, rel_path = generate_path(path)
 
     # Check if the path is a directory. If not return warning mssage.
     if not path.exists():
@@ -56,7 +55,6 @@ def generate_code_statistics(path, verbose, ignore_blank_lines):
         return
 
     verbose_print("Directory to read at {}".format(path))
-
     lines_of_code = statistics.evaluate_lines_of_code(path, ignore_blank_lines)
     click.echo("Lines of Code {}".format(lines_of_code))
 
