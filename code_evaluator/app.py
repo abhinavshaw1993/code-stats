@@ -7,14 +7,17 @@ sys.path.insert(1, os.path.join(sys.path[0], '..'))
 sys.path.insert(1, os.path.join(sys.path[0], 'utils'))
 
 import code_evaluator.bin.statistics as statistics
+import code_evaluator.utils.print_utils as print_utils
 from pathlib import Path
 from code_evaluator.utils.logging_utils  import Logger
+
+kOutputFontColor = "yellow"
+kNotificationFontColor = 'blue'
 
 # Function to generate paths.
 def generate_path(path):
     # Getting relative path and path from string.
     rel_path = os.getcwd()
-
     if rel_path in path:
         click.echo("relative path in path, no need to append.")
         path = Path(path)
@@ -22,9 +25,7 @@ def generate_path(path):
         path = Path(os.path.join(rel_path, path))
 
     rel_path = Path(rel_path)
-
-    print("Path{} and Rel_path{}:".format(path, rel_path))
-
+    
     return path, rel_path
 
 # Main function which reads the command line arguments.
@@ -52,12 +53,16 @@ def generate_code_statistics(path, verbose, ignore_blank_lines):
     lines_of_code, lines_of_code_per_language = statistics.evaluate_lines_of_code(path, ignore_blank_lines)
 
     # Print Results.
-    click.echo("#################################")
-    click.echo("Total Lines of Code {} \n".format(lines_of_code))
-    for k in lines_of_code_per_language.keys():
-        click.echo(k + " - "+ str(lines_of_code_per_language[k]))
+    click.secho("############## Code Evaluator Output ################", bg='white', fg="black", bold=True)
 
-    click.echo("#################################")
+    click.secho("\nTotal Lines of Code - {}".format(lines_of_code), fg=kOutputFontColor , nl=False)
+    click.echo("\n")
+    lines_of_code_per_language = print_utils.convert_dict_to_list(lines_of_code_per_language)
+    output_table = print_utils.table(data=lines_of_code_per_language, header=['Language', 'Line of Code'])
+    click.secho(output_table, fg=kOutputFontColor)
+
+    click.echo()
+    click.secho("################### End Output ######################", bg='white', fg="black", bold=True)
     return
 
 if __name__ == '__main__':
