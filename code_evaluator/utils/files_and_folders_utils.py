@@ -9,6 +9,7 @@ def get_total_line_for_file(path_to_file):
     """
     Calculate the total number of line in the given file.
     """
+    i = -1
     with open(path_to_file) as f:
         for i, l in enumerate(f):
             pass

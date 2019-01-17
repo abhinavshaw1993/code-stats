@@ -1,1 +1,1 @@
-file_ext: ['.py', '.h', '.cc', '.cpp']
+file_ext: ['.py', '.h', '.cc', '.cpp', '.js', '.java']

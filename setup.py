@@ -10,15 +10,13 @@ setup(
     3. Percentage wise break up of different languages used.''',
     author='Abhinav Shaw',
     author_email='abhinavshaw@umass.edu',
-    packages = find_packages(exclude=("tests")),
+    packages = find_packages(),
     install_requires=[
         'click',
     ],
     entry_points={
     'console_scripts' : ['evaluate=code_evaluator.app:generate_code_statistics']
     },
-    package_data = {
-    'app' : ['default_file_ext_list.yaml']
-    },
+    include_package_data = True,
     zip_safe = False
 )

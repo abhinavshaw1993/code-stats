@@ -2,14 +2,22 @@
 Python Module for Generating Various Statistics.
 """
 import os
-import utils.files_and_folders_utils as utils
-import utils.data_utils as data_utils
+import sys
+
+import code_evaluator.utils.files_and_folders_utils as utils
+import code_evaluator.utils.data_utils as data_utils
 
 from collections import Counter
 from pathlib import Path
 from code_evaluator.utils.logging_utils import Logger
 
 kDefaultFileExtYamlFilePath = "data/default_file_ext_list.yaml"
+
+def get_file_extension_list(file_ext_list_file_path):
+    """
+    Return file extension list
+    """
+    return data_utils.read_yaml(file_ext_list_file_path)['file_ext']
 
 def evaluate_lines_of_code(path_to_project,
                            ignore_blank_lines=False,
@@ -24,7 +32,7 @@ def evaluate_lines_of_code(path_to_project,
 
     files = utils.get_files_in_dir(path_to_project)
     folders = utils.get_folders_in_dir(path_to_project)
-    file_ext_list = data_utils.read_yaml(file_ext_list_file_path)['file_ext']
+    file_ext_list = get_file_extension_list(file_ext_list_file_path)
 
     # Loop to count lines of files.
     for file in files:
