@@ -23,6 +23,8 @@ def generate_path(path):
 
     rel_path = Path(rel_path)
 
+    print("Path{} and Rel_path{}:".format(path, rel_path))
+
     return path, rel_path
 
 # Main function which reads the command line arguments.
@@ -39,17 +41,23 @@ def generate_code_statistics(path, verbose, ignore_blank_lines):
 
     # Check if the path is a directory. If not return warning mssage.
     if not path.exists():
+        click.echo("Path does not exist!")
         return
-        logger.verbose_print("Path does not exist!")
 
     if not path.is_dir():
-        logger.verbose_print("Path is not  directory. Please enter a valid directory!")
+        click.echo("Path is not  directory. Please enter a valid directory!")
         return
 
     logger.verbose_print("Directory to read at {}".format(path))
-    lines_of_code = statistics.evaluate_lines_of_code(path, ignore_blank_lines)
-    click.echo("Lines of Code {}".format(lines_of_code))
+    lines_of_code, lines_of_code_per_language = statistics.evaluate_lines_of_code(path, ignore_blank_lines)
 
+    # Print Results.
+    click.echo("#################################")
+    click.echo("Total Lines of Code {} \n".format(lines_of_code))
+    for k in lines_of_code_per_language.keys():
+        click.echo(k + " - "+ str(lines_of_code_per_language[k]))
+
+    click.echo("#################################")
     return
 
 if __name__ == '__main__':
