@@ -3,3 +3,7 @@ __pycache__/
 dist/
 build/
 code_evaluator.egg-info/
+/*.egg-info/
+
+# ignore pycharm project files
+/.idea/

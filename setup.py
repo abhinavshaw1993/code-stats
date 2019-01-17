@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='code_evaluator',
@@ -10,13 +10,15 @@ setup(
     3. Percentage wise break up of different languages used.''',
     author='Abhinav Shaw',
     author_email='abhinavshaw@umass.edu',
-    py_modules=['code_evaluator'],
-    scripts=['utils.py', 'statistics.py'],
+    packages = find_packages(exclude=("tests")),
     install_requires=[
-        'Click',
+        'click',
     ],
-    entry_points='''
-        [console_scripts]
-        evaluate=code_evaluator:generate_code_statistics
-    ''',
+    entry_points={
+    'console_scripts' : ['evaluate=code_evaluator.app:generate_code_statistics']
+    },
+    package_data = {
+    'app' : ['default_file_ext_list.yaml']
+    },
+    zip_safe = False
 )

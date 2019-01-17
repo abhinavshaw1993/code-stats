@@ -1,23 +1,14 @@
-from pathlib import Path
-
 import click
 import os
-import statistics
+import sys
 
-def generate_file_and_dir_list(root_dir):
-    return
+# Adding directories to path.
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+sys.path.insert(1, os.path.join(sys.path[0], 'utils'))
 
-# Function to define verbose function.
-def define_verbose_print(verbose):
-    global verbose_print
-
-    if verbose:
-        def verbose_print(*args):
-            for arg  in args:
-                click.echo(arg)
-    else:
-        # Do nothing function.
-        verbose_print = lambda *a : None
+import code_evaluator.bin.statistics as statistics
+from pathlib import Path
+from utils.logging_utils  import Logger
 
 # Function to generate paths.
 def generate_path(path):
@@ -40,21 +31,22 @@ def generate_path(path):
 @click.option("--verbose", is_flag=True, help="Run in verbose mode.")
 @click.option("--ignore_blank_lines", is_flag=True, help="Ignores blank lines while calculating lines of code.")
 def generate_code_statistics(path, verbose, ignore_blank_lines):
-    # Defining verbose function.
-    define_verbose_print(verbose)
+    # Instantiating logging object.
+    logger = Logger()
+    logger.set_verbosity(verbose)
     # Path to read stored in path.
     path, rel_path = generate_path(path)
 
     # Check if the path is a directory. If not return warning mssage.
     if not path.exists():
         return
-        verbose_print("Path does not exist!")
+        logger.verbose_print("Path does not exist!")
 
     if not path.is_dir():
-        verbose_print("Path is not  directory. Please enter a valid directory!")
+        logger.verbose_print("Path is not  directory. Please enter a valid directory!")
         return
 
-    verbose_print("Directory to read at {}".format(path))
+    logger.verbose_print("Directory to read at {}".format(path))
     lines_of_code = statistics.evaluate_lines_of_code(path, ignore_blank_lines)
     click.echo("Lines of Code {}".format(lines_of_code))
 
