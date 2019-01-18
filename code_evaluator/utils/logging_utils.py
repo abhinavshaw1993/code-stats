@@ -1,10 +1,21 @@
 """
 Module difining logging utils - verbose_print
 """
+import click
 
-def print_list(*args):
+kTypeColorMap = {
+'info' : 'green',
+'warning' : 'red',
+'error' : 'red'
+}
+
+def print_list(*args, msg_type):
+	if msg_type not in kTypeColorMap.keys():
+		return
+
 	for element in args:
-		print(element)
+		click.secho(str(element), fg=kTypeColorMap[msg_type])
+
 """
 Implements singleton of logger.
 """
@@ -12,7 +23,6 @@ class Borg:
     _shared_state = {}
     def __init__(self):
         self.__dict__ = self._shared_state
-
 
 """
 Logger class with bunch of logging functions.
@@ -25,21 +35,16 @@ class Logger(Borg):
 
     verbose_print = None
     verbosity = None
+    verbosity_level = 0
 
     def __init__(self):
         Borg.__init__(self)
 
-    def set_verbosity(self, verbose):
+    def set_verbosity(self, verbose, verbosity_level):
         if self.verbosity is None:
             self.verbosity = verbose
+            self.verbosity_level = verbosity_level
             if verbose:
-                print("Verbosity set correctly")
-                self.verbose_print = lambda *a : print_list(*a)
+                self.verbose_print = lambda *a, v_lvl, msg_type : print_list(*a, msg_type=msg_type) if v_lvl <= self.verbosity_level else None
             else:
-                self.verbose_print = lambda *a : None
-
-    def get_verbose_print():
-        if verbosity is not None:
-            return self.verbose_print
-
-        return
+                self.verbose_print = lambda *a, v_lvl, msg_type : None
