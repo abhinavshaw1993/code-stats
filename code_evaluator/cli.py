@@ -9,9 +9,14 @@ sys.path.insert(1, os.path.join(sys.path[0], 'utils'))
 import code_evaluator.bin.statistics as statistics
 from pathlib import Path
 from code_evaluator.bin.logger  import Logger
+from code_evaluator.definitions import USER_HOME
 
 # Function to generate paths.
 def generate_path(path):
+    # Resolvin `~`.
+    if '~' in path:
+        return Path(path.replace('~', str(USER_HOME)))
+
     # Getting relative path and path from string.
     rel_path = os.getcwd()
     if rel_path in path:
@@ -20,8 +25,7 @@ def generate_path(path):
     else:
         path = Path(os.path.join(rel_path, path))
 
-    rel_path = Path(rel_path)
-    return path, rel_path
+    return path
 
 # Main function which reads the command line arguments.
 @click.command()
@@ -37,7 +41,7 @@ def generate_code_statistics(path, verbose, v_lvl, ignore_blank_lines):
     # Print Results.
     click.secho("############## Code Evaluator Output ################", bg='white', fg="black", bold=True)
     # Path to read stored in path.
-    path, rel_path = generate_path(path)
+    path = generate_path(path)
     Logger().verbose_print("Path: {} \n".format(path), v_lvl=1, msg_type='warning')
 
     # Check if the path is a directory. If not return warning mssage.
