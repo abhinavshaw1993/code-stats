@@ -52,13 +52,6 @@ def generate_code_statistics(path, verbose, v_lvl, ignore_blank_lines):
         return
 
     logger.verbose_print("Directory to read at {}".format(path), v_lvl=0, msg_type='info')
-    # lines_of_code, lines_of_code_per_language = statistics.evaluate_lines_of_code(path, ignore_blank_lines)
-    #
-    # click.secho("\nTotal Lines of Code - {}".format(lines_of_code), fg=kOutputFontColor , nl=False)
-    # click.echo("\n")
-    # lines_of_code_per_language = print_utils.convert_dict_to_list(lines_of_code_per_language)
-    # output_table = print_utils.table(data=lines_of_code_per_language, header=['Language', 'Line of Code'])
-    # click.secho(output_table, fg=kOutputFontColor)
     statistics.generate_and_print_stats(path, ignore_blank_lines=ignore_blank_lines)
 
     click.echo()

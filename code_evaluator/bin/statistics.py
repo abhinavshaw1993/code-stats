@@ -9,6 +9,7 @@ import code_evaluator.definitions as definitions
 import code_evaluator.utils.files_and_folders_utils as utils
 import code_evaluator.utils.data_utils as data_utils
 import code_evaluator.utils.print_utils as print_utils
+import code_evaluator.utils.conversion_utils as conversion_utils
 
 from collections import Counter
 from pathlib import Path
@@ -44,13 +45,21 @@ def generate_and_print_stats(path_to_project,
                             file_ext_list_file_path=kDefaultFileExtYamlFilePath,
                             ignore_blank_lines=False):
     total_lines_of_code, lines_of_code_per_language = evaluate_lines_of_code(
-    path_to_project, file_ext_list_file_path, ignore_blank_lines)
+        path_to_project, file_ext_list_file_path, ignore_blank_lines)
 
-    percentage_of_code = evaluate_percentage_of_code(total_lines_of_code,lines_of_code_per_language)
-    click.secho("\nTotal Lines of Code - {}".format(total_lines_of_code), fg=definitions.kOutputFontColor , nl=False)
+    percentage_of_code = evaluate_percentage_of_code(
+        total_lines_of_code,lines_of_code_per_language)
+
+    click.secho("\nTotal Lines of Code - {}".format(total_lines_of_code),
+        fg=definitions.kOutputFontColor , nl=False)
     click.echo("\n")
-    lines_of_code_per_language = print_utils.convert_dict_to_list(lines_of_code_per_language)
-    output_table = print_utils.table(data=lines_of_code_per_language, header=['Language', 'Line of Code'])
+
+    output = conversion_utils.convert_dicts_to_list(
+        lines_of_code_per_language, percentage_of_code)
+    output_table = print_utils.table(
+        data=output,
+        header=['Language', 'Line of Code', 'Percentage'])
+
     click.secho(output_table, fg=definitions.kOutputFontColor)
 
 def evaluate_lines_of_code(path_to_project,
@@ -84,6 +93,9 @@ def evaluate_lines_of_code(path_to_project,
     return total_lines_of_code, lines_of_code_per_language
 
 def evaluate_percentage_of_code(total_lines_of_code, lines_of_code_per_language):
+    """
+    Return Percentage of code per language.
+    """
     percentage_of_code = {}
     for key in lines_of_code_per_language.keys():
         percentage_of_code[key] = lines_of_code_per_language[key] / total_lines_of_code * 100
