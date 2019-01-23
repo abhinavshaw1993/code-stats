@@ -7,7 +7,7 @@ import click
 
 import code_evaluator.definitions as definitions
 import code_evaluator.utils.files_and_folders_utils as utils
-import code_evaluator.utils.data_utils as data_utils
+import code_evaluator.bin.data_reader as data_reader
 import code_evaluator.utils.print_utils as print_utils
 import code_evaluator.utils.conversion_utils as conversion_utils
 from code_evaluator.bin.logger import Logger
@@ -19,7 +19,7 @@ from pathlib import Path
 kDefaultFileExtYamlFilePath = "data/default_ext_list.yml"
 
 def get_extension_dict(file_ext_list_file_path):
-    language_dict = data_utils.read_yaml(file_ext_list_file_path)
+    language_dict = data_reader.read_yaml(file_ext_list_file_path)
 
     return language_dict
 
