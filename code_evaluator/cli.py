@@ -10,8 +10,6 @@ import code_evaluator.bin.statistics as statistics
 from pathlib import Path
 from code_evaluator.utils.logging_utils  import Logger
 
-
-
 # Function to generate paths.
 def generate_path(path):
     # Getting relative path and path from string.

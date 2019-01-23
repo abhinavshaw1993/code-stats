@@ -44,23 +44,38 @@ def get_ext_to_language_map_from_dict(extensions_dict):
 def generate_and_print_stats(path_to_project,
                             file_ext_list_file_path=kDefaultFileExtYamlFilePath,
                             ignore_blank_lines=False):
+    """
+    Generates and Prints statistics as a table on the Command Line.
+    """
+    click.echo("\n")
+    header, output= generate_stats(path_to_project,
+                            file_ext_list_file_path,
+                            ignore_blank_lines)
+    output_table = print_utils.table(
+        data=output,
+        header=header)
+    click.secho(output_table, fg=definitions.kOutputFontColor)
+
+def generate_stats(path_to_project,
+                   file_ext_list_file_path=kDefaultFileExtYamlFilePath,
+                   ignore_blank_lines=False):
+    """
+    Generates statistics as a list of lists and returns the header as well.
+    """
+    header = ['Language']
+
     total_lines_of_code, lines_of_code_per_language = evaluate_lines_of_code(
         path_to_project, file_ext_list_file_path, ignore_blank_lines)
+    header.append('Lines of Code')
 
     percentage_of_code = evaluate_percentage_of_code(
         total_lines_of_code,lines_of_code_per_language)
-
-    click.secho("\nTotal Lines of Code - {}".format(total_lines_of_code),
-        fg=definitions.kOutputFontColor , nl=False)
-    click.echo("\n")
+    header.append('Percentage')
 
     output = conversion_utils.convert_dicts_to_list(
         lines_of_code_per_language, percentage_of_code)
-    output_table = print_utils.table(
-        data=output,
-        header=['Language', 'Line of Code', 'Percentage'])
 
-    click.secho(output_table, fg=definitions.kOutputFontColor)
+    return header, output
 
 def evaluate_lines_of_code(path_to_project,
                            file_ext_list_file_path,
