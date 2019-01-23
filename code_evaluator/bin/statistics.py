@@ -10,10 +10,11 @@ import code_evaluator.utils.files_and_folders_utils as utils
 import code_evaluator.utils.data_utils as data_utils
 import code_evaluator.utils.print_utils as print_utils
 import code_evaluator.utils.conversion_utils as conversion_utils
+from code_evaluator.bin.logger import Logger
 
 from collections import Counter
 from pathlib import Path
-from code_evaluator.utils.logging_utils import Logger
+
 
 kDefaultFileExtYamlFilePath = "data/default_ext_list.yml"
 

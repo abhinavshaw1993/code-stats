@@ -8,7 +8,7 @@ sys.path.insert(1, os.path.join(sys.path[0], 'utils'))
 
 import code_evaluator.bin.statistics as statistics
 from pathlib import Path
-from code_evaluator.utils.logging_utils  import Logger
+from code_evaluator.bin.logger  import Logger
 
 # Function to generate paths.
 def generate_path(path):

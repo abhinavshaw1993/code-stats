@@ -1,4 +1,4 @@
-from code_evaluator.utils.logging_utils import Logger
+from code_evaluator.bin.logger import Logger
 
 def convert_dict_to_list(dictionary):
     """
