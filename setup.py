@@ -6,8 +6,7 @@ setup(
     description='''A command line tool to generate code statistics for a given directory.
     These statistics include
     1. Total Lines of Code.
-    2. Total number of files.
-    3. Percentage wise break up of different languages used.''',
+    2. Percentage wise break up of different languages used.''',
     author='Abhinav Shaw',
     author_email='abhinavshaw@umass.edu',
     packages = find_packages(),
@@ -15,7 +14,7 @@ setup(
         'click',
     ],
     entry_points={
-    'console_scripts' : ['evaluate=code_evaluator.app:generate_code_statistics']
+    'console_scripts' : ['evaluate=code_evaluator.cli:generate_code_statistics']
     },
     include_package_data = True,
     zip_safe = False

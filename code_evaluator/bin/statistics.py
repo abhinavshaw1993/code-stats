@@ -75,7 +75,27 @@ def generate_stats(path_to_project,
     output = conversion_utils.convert_dicts_to_list(
         lines_of_code_per_language, percentage_of_code)
 
+    output.append(evaluate_total(output))
+
     return header, output
+
+def evaluate_total(output):
+    """
+    Evaluates the total of the different statistics.
+    @example: if lines of code and percentage for languages are
+              Language Lines Percentage
+              "Python"   20     20
+              "Java"     80     80
+              This will return ['Total', 100, 100]
+    """
+    total_stats = ['Total']
+    for stat_idx in range(1, len(output[0])):
+        stat_total = 0
+        for lang_stats in output:
+            stat_total += lang_stats[stat_idx]
+        total_stats.append(stat_total)
+
+    return total_stats
 
 def evaluate_lines_of_code(path_to_project,
                            file_ext_list_file_path,
