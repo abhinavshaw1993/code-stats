@@ -141,7 +141,7 @@ def evaluate_lines_of_code(path_to_project,
 
         if file_ext in ext_set :
             Logger().verbose_print("File: ", Path(file), v_lvl=5, msg_type='info')
-            line_count = utils.get_total_line_for_file(file)
+            line_count = utils.get_total_line_for_file(file, ignore_blank_lines)
             lines_of_code_per_language[ext_lang_map[file_ext]] += line_count
             total_lines_of_code += line_count
 

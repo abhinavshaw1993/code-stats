@@ -5,16 +5,19 @@ import os
 import copy
 from collections import deque
 
-def get_total_line_for_file(path_to_file):
+def get_total_line_for_file(path_to_file, ignore_blank_lines=False):
     """
     Calculate the total number of line in the given file.
     """
-    i = -1
+    i = 0
     with open(path_to_file) as f:
-        for i, l in enumerate(f):
-            pass
+        for line in f:
+            if line == "\n" and ignore_blank_lines:
+                pass
+            else:
+                i+=1
 
-    return i + 1
+    return i
 
 def get_files_and_folders_in_dir(path_to_dir):
     """
