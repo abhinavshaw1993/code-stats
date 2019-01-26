@@ -42,3 +42,9 @@ def are_keys_equal(keys_1, keys_2):
             return False
 
     return True
+
+def convert_csv_to_list(string):
+    """
+    Convert Cauma separated values to list.
+    """
+    return string.split(",")

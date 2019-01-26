@@ -42,39 +42,52 @@ def get_ext_to_language_map_from_dict(extensions_dict):
 
     return ext_to_language_map
 
-def generate_and_print_stats(path_to_project,
-                            file_ext_list_file_path=kDefaultFileExtYamlFilePath,
-                            ignore_blank_lines=False):
+def generate_and_print_stats(**kwargs):
     """
     Generates and Prints statistics as a table on the Command Line.
     """
+    # Retrieving Parameters.
+    path_to_project = kwargs.get("path_to_project")
+    file_ext_list_file_path = kwargs.get("file_ext_list_file_path" ,kDefaultFileExtYamlFilePath)
+    ignore_blank_lines = kwargs.get("ignore_blank_lines", False)
+    ignore_extensions = kwargs.get("ignore_extensions", [])
+
     click.echo("\n")
     header, output= generate_stats(path_to_project,
                             file_ext_list_file_path,
-                            ignore_blank_lines)
+                            ignore_blank_lines,
+                            ignore_extensions)
     output_table = print_utils.table(
         data=output,
         header=header)
     click.secho(output_table, fg=definitions.kOutputFontColor)
 
+    return
+
 def generate_stats(path_to_project,
                    file_ext_list_file_path=kDefaultFileExtYamlFilePath,
-                   ignore_blank_lines=False):
+                   ignore_blank_lines=False,
+                   ignore_extensions=[]):
     """
     Generates statistics as a list of lists and returns the header as well.
     """
     header = ['Language']
 
     total_lines_of_code, lines_of_code_per_language = evaluate_lines_of_code(
-        path_to_project, file_ext_list_file_path, ignore_blank_lines)
+        path_to_project,
+        file_ext_list_file_path,
+        ignore_blank_lines,
+        ignore_extensions)
     header.append('Lines of Code')
 
     percentage_of_code = evaluate_percentage_of_code(
-        total_lines_of_code,lines_of_code_per_language)
+        total_lines_of_code,
+        lines_of_code_per_language)
     header.append('Percentage')
 
     output = conversion_utils.convert_dicts_to_list(
-        lines_of_code_per_language, percentage_of_code)
+        lines_of_code_per_language,
+        percentage_of_code)
 
     output.append(evaluate_total(output))
 
@@ -100,7 +113,8 @@ def evaluate_total(output):
 
 def evaluate_lines_of_code(path_to_project,
                            file_ext_list_file_path,
-                           ignore_blank_lines):
+                           ignore_blank_lines,
+                           ignore_extensions):
     """
     Count lines of code in folder.
     """
@@ -114,13 +128,18 @@ def evaluate_lines_of_code(path_to_project,
 
     # Language map is used to map file extension to programming languages.
     ext_dict = get_extension_dict(file_ext_list_file_path)
-    ext_list = get_file_extension_list_from_dict(ext_dict)
+    ext_set = set(get_file_extension_list_from_dict(ext_dict))
     ext_lang_map = get_ext_to_language_map_from_dict(ext_dict)
+    # Ignoreing the extensions that are there in the ignore list.
+    for ext in ignore_extensions:
+        if "." + ext in ext_set:
+            ext_set.remove("." + ext)
+
     # Loop to count lines of files.
     for file in files:
         file_name, file_ext = os.path.splitext(file)
 
-        if file_ext in ext_list :
+        if file_ext in ext_set :
             Logger().verbose_print("File: ", Path(file), v_lvl=5, msg_type='info')
             line_count = utils.get_total_line_for_file(file)
             lines_of_code_per_language[ext_lang_map[file_ext]] += line_count
