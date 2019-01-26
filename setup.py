@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='code_evaluator',
+    name='codestat',
     version='0.1',
     description='''A command line tool to generate code statistics for a given directory.
     These statistics include
@@ -14,7 +14,7 @@ setup(
         'click',
     ],
     entry_points={
-    'console_scripts' : ['evaluate=code_evaluator.cli:generate_code_statistics']
+    'console_scripts' : ['codestat=code_stat.cli:generate_code_statistics']
     },
     include_package_data = True,
     zip_safe = False

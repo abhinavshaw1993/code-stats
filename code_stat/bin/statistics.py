@@ -5,12 +5,12 @@ import os
 import sys
 import click
 
-import code_evaluator.definitions as definitions
-import code_evaluator.utils.files_and_folders_utils as utils
-import code_evaluator.bin.data_reader as data_reader
-import code_evaluator.utils.print_utils as print_utils
-import code_evaluator.utils.conversion_utils as conversion_utils
-from code_evaluator.bin.logger import Logger
+import code_stat.definitions as definitions
+import code_stat.utils.files_and_folders_utils as utils
+import code_stat.bin.data_reader as data_reader
+import code_stat.utils.print_utils as print_utils
+import code_stat.utils.conversion_utils as conversion_utils
+from code_stat.bin.logger import Logger
 
 from collections import Counter
 from pathlib import Path
