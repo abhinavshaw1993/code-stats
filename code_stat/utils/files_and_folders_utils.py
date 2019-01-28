@@ -5,6 +5,8 @@ import os
 import copy
 from collections import deque
 
+from code_stat.definitions import data_units
+
 def get_total_line_for_file(path_to_file, ignore_blank_lines=False):
     """
     Calculate the total number of line in the given file.
@@ -67,3 +69,12 @@ def get_folders_in_dir(path_to_dir):
         persistent_folders_list.extendleft(sub_folders)
 
     return persistent_folders_list
+
+def get_size_for_file(file, data_unit):
+    """
+    Returns size for the file.
+    """
+    # Gets the file size in bytes.
+    file_stat = os.stat(file)
+
+    return file_stat.st_size / data_units[data_unit]

@@ -8,6 +8,7 @@ sys.path.insert(1, os.path.join(sys.path[0], 'utils'))
 
 import code_stat.bin.statistics as statistics
 import code_stat.utils.conversion_utils as conversion_utils
+from code_stat.definitions import data_units
 from pathlib import Path
 from code_stat.bin.logger  import Logger
 from code_stat.definitions import USER_HOME
@@ -33,9 +34,14 @@ def generate_path(path):
 @click.option("--path", default="", help="Path to Project, accepts both Pure and Relative")
 @click.option("--verbose", is_flag=True, help="Run in verbose mode.")
 @click.option("--v_lvl", default=0, help="Verbosity level, everythin lesser and equal to is print. Needs --verose flag to be true.")
+@click.option("--du", default="b", help="Data Unit to calculate File Sizes. \n\
+                                    1. b - Bytes \n\
+                                    2. kb - Kilo Bytes \n\
+                                    3. mb - Mega Bytes \n\
+                                    4. gb - Giga Bytes")
 @click.option("--ignore_blank_lines", is_flag=True, help="Ignores blank lines while calculating lines of code.")
 @click.option("--ignore_extensions", default="")
-def generate_code_statistics(path, verbose, v_lvl, ignore_blank_lines, ignore_extensions):
+def generate_code_statistics(path, verbose, v_lvl , du, ignore_blank_lines, ignore_extensions):
     click.secho("############## CodeStat Output ################", bg='white', fg="black", bold=True)
     # Instantiating logging object.
     logger = Logger()
@@ -54,12 +60,16 @@ def generate_code_statistics(path, verbose, v_lvl, ignore_blank_lines, ignore_ex
         click.echo("Path is not  directory. Please enter a valid directory!")
         return
 
+    if du not in data_units.keys():
+        click.echo("Invalid Data Unit, please enter valid Data Unit.")
+
     ignore_extensions = conversion_utils.convert_csv_to_list(ignore_extensions)
 
     Logger().verbose_print("Directory to read at {}".format(path),
                             v_lvl=0, msg_type='info')
     statistics.generate_and_print_stats(path_to_project=path,
                                         ignore_blank_lines=ignore_blank_lines,
+                                        data_unit=du,
                                         ignore_extensions=ignore_extensions)
     click.echo()
     click.secho("################### End Output ######################", bg='white', fg="black", bold=True)
