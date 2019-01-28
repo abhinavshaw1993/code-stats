@@ -36,7 +36,7 @@ def generate_path(path):
 @click.option("--ignore_blank_lines", is_flag=True, help="Ignores blank lines while calculating lines of code.")
 @click.option("--ignore_extensions", default="")
 def generate_code_statistics(path, verbose, v_lvl, ignore_blank_lines, ignore_extensions):
-    click.secho("############## Code Evaluator Output ################", bg='white', fg="black", bold=True)
+    click.secho("############## CodeStat Output ################", bg='white', fg="black", bold=True)
     # Instantiating logging object.
     logger = Logger()
     logger.set_verbosity(verbose, v_lvl)
