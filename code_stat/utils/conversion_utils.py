@@ -3,8 +3,8 @@ from code_stat.bin.logger import Logger
 def convert_dict_to_list(dictionary):
     """
     Accepts a dictionary and return a list of lists.
-    @example:   input = { "python" : 50, "json": 100, "text" : 20}
-                output = [['python', 50], ['json', 100], ['text', 20]]
+    @example:   input : { "python" : 50, "json": 100, "text" : 20}
+                output : [['python', 50], ['json', 100], ['text', 20]]
     """
     output_list = []
     for k in dictionary.keys():
@@ -15,7 +15,9 @@ def convert_dict_to_list(dictionary):
 def convert_dicts_to_list(*dicts):
     """
     Accepts mutiple dictions with the same keys and return a list of lists.
-    @example : return a list
+    @example : Input = {"python" : 50, "json": 100, "text" : 20}
+                       {"python" : .5, "json": .3, "text" : .2}
+               Output = [['python', 50, .5], ['json', 100, .3], ['text', 20, .2]]
     """
     output_list = []
     # Check if all the dicts have the same keys.
@@ -45,6 +47,6 @@ def are_keys_equal(keys_1, keys_2):
 
 def convert_csv_to_list(string):
     """
-    Convert Cauma separated values to list.
+    Convert Cauma separated single string to list.
     """
     return string.split(",")
