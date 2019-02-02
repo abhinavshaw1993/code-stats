@@ -9,13 +9,23 @@ setup(
     2. Percentage wise break up of different languages used.''',
     author='Abhinav Shaw',
     author_email='abhinavshaw@umass.edu',
-    packages = find_packages(),
+    packages=find_packages(),
     install_requires=[
         'click',
+        'os',
+        'pathlib',
+        'sys'
+    ],
+    setup_requires=[
+        "pytest-runner",
+    ],
+    test_requires=[
+        'pytest',
     ],
     entry_points={
-    'console_scripts' : ['codestat=code_stat.cli:generate_code_statistics']
+        'console_scripts' : ['codestat=code_stat.cli:generate_code_statistics']
     },
-    include_package_data = True,
-    zip_safe = False
+    include_package_data=True,
+    zip_safe=False,
+    setup_cfg=True
 )

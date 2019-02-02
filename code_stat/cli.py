@@ -32,16 +32,16 @@ def generate_path(path):
 # Main function which reads the command line arguments.
 @click.command()
 @click.option("--path", default="", help="Path to Project, accepts both Pure and Relative")
-@click.option("--verbose", is_flag=True, help="Run in verbose mode.")
-@click.option("--v_lvl", default=0, help="Verbosity level, everythin lesser and equal to is print. Needs --verose flag to be true.")
-@click.option("--du", default="b", help="Data Unit to calculate File Sizes. \n\
+@click.option("--du", default="b", help="Data Unit to calculate File Sizes.\n\
+                                    Accepted values-\n\
                                     1. b - Bytes \n\
                                     2. kb - Kilo Bytes \n\
-                                    3. mb - Mega Bytes \n\
-                                    4. gb - Giga Bytes")
-@click.option("--ignore_blank_lines", is_flag=True, help="Ignores blank lines while calculating lines of code.")
-@click.option("--ignore_extensions", default="")
-def generate_code_statistics(path, verbose, v_lvl , du, ignore_blank_lines, ignore_extensions):
+                                    3. mb - Mega Bytes \n 4. gb - Giga Bytes")
+@click.option("--ignore_blank_lines", is_flag=True, help="Ignore blank lines while calculating lines of code.")
+@click.option("--ignore_extensions", default="", help="Comma separated string of extensions that needs to be ignored.")
+@click.option("--verbose", is_flag=True, help="Run in verbose mode.")
+@click.option("--v_lvl", default=0, help="Verbosity level, verbosity set lesser or equal this number to will be printed. Needs --verose flag to be true.")
+def generate_code_statistics(path, du, ignore_blank_lines, ignore_extensions, verbose, v_lvl):
     click.secho("############## CodeStat Output ################", bg='white', fg="black", bold=True)
     # Instantiating logging object.
     logger = Logger()
