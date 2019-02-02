@@ -142,10 +142,9 @@ def evaluate_lines_of_code(path_to_project,
     ext_dict = get_extension_dict(file_ext_list_file_path)
     ext_set = set(get_file_extension_list_from_dict(ext_dict))
     ext_lang_map = get_ext_to_language_map_from_dict(ext_dict)
-    # Ignoreing the extensions that are there in the ignore list.
-    for ext in ignore_extensions:
-        if "." + ext in ext_set:
-            ext_set.remove("." + ext)
+    
+    # Ignoring the extensions that are there in the ignore list.
+    ext_set = get_extension_set_after_ignore(ext_set, ignore_extensions)
 
     # Loop to count lines of files.
     for file in files:
@@ -189,9 +188,7 @@ def evaluate_sizes(path_to_project,
     ext_lang_map = get_ext_to_language_map_from_dict(ext_dict)
 
     # Ignoring the extensions that are there in the ignore list.
-    for ext in ignore_extensions:
-        if "." + ext in ext_set:
-            ext_set.remove("." + ext)
+    ext_set = get_extension_set_after_ignore(ext_set, ignore_extensions)
 
     # Loop to find size of files.
     for file in files:
@@ -218,3 +215,13 @@ def evaluate_num_files_and_folders():
     folder_count = count(utils.get_sub_folders_in_dir(path_to_project))
 
     return file_count, folder_count
+
+def get_extension_set_after_ignore(ext_set ,ignore_extensions):
+    # Ignoring the extensions that are there in the ignore list.
+    for ext in ignore_extensions:
+        if "." + ext in ext_set:
+            ext_set.remove("." + ext)
+        elif ext in ext_set:
+            ext_set.remove(ext)
+
+    return ext_set
