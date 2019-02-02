@@ -13,9 +13,16 @@ setup(
     install_requires=[
         'click',
     ],
+    setup_requires=[
+        "pytest-runner",
+    ],
+    test_requires=[
+        'pytest',
+    ],
     entry_points={
-    'console_scripts' : ['codestat=code_stat.cli:generate_code_statistics']
+        'console_scripts' : ['codestat=code_stat.cli:generate_code_statistics']
     },
     include_package_data = True,
-    zip_safe = False
+    zip_safe = False,
+    setup_cfg=True
 )

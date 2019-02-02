@@ -1,0 +1,4 @@
+A command line tool to generate code statistics for a given directory.
+These statistics include
+  1. Total Lines of Code.
+  2. Percentage wise break up of different languages used.
