@@ -12,15 +12,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'click',
-        'os',
         'pathlib',
-        'sys'
-    ],
-    setup_requires=[
-        "pytest-runner",
-    ],
-    test_requires=[
-        'pytest',
     ],
     setup_requires=[
         "pytest-runner",
