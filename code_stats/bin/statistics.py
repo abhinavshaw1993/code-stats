@@ -5,12 +5,12 @@ import os
 import sys
 import click
 
-import code_stat.definitions as definitions
-import code_stat.utils.files_and_folders_utils as utils
-import code_stat.bin.data_reader as data_reader
-import code_stat.utils.print_utils as print_utils
-import code_stat.utils.conversion_utils as conversion_utils
-from code_stat.bin.logger import Logger
+import code_stats.definitions as definitions
+import code_stats.utils.files_and_folders_utils as utils
+import code_stats.bin.data_reader as data_reader
+import code_stats.utils.print_utils as print_utils
+import code_stats.utils.conversion_utils as conversion_utils
+from code_stats.bin.logger import Logger
 
 from collections import Counter
 from pathlib import Path
@@ -129,7 +129,7 @@ def evaluate_lines_of_code(path_to_project,
     """
     Count lines of code in folder.
     """
-    Logger().verbose_print("Evaluating lines of code.", v_lvl=5, msg_type='info')
+    Logger().verbose_print("Evaluating lines of code.  \n", v_lvl=5, msg_type='info')
     # Variable to store total number of lines of code.
     total_lines_of_code = 0
     # Default dict storying lines of code per file ext.
@@ -142,7 +142,7 @@ def evaluate_lines_of_code(path_to_project,
     ext_dict = get_extension_dict(file_ext_list_file_path)
     ext_set = set(get_file_extension_list_from_dict(ext_dict))
     ext_lang_map = get_ext_to_language_map_from_dict(ext_dict)
-    
+
     # Ignoring the extensions that are there in the ignore list.
     ext_set = get_extension_set_after_ignore(ext_set, ignore_extensions)
 
@@ -151,8 +151,13 @@ def evaluate_lines_of_code(path_to_project,
         file_name, file_ext = os.path.splitext(file)
 
         if file_ext in ext_set :
-            Logger().verbose_print("File: ", Path(file), v_lvl=5, msg_type='info')
-            line_count = utils.get_total_line_for_file(file, ignore_blank_lines)
+
+            try:
+                line_count = utils.get_total_line_for_file(file, ignore_blank_lines)
+            except UnicodeDecodeError:
+                Logger().verbose_print("Skipping File: {} becaus of UnicodeDevoceError. \n".format(file),
+                 v_lvl=5, msg_type='error')
+
             lines_of_code_per_language[ext_lang_map[file_ext]] += line_count
             total_lines_of_code += line_count
 
@@ -175,7 +180,6 @@ def evaluate_sizes(path_to_project,
     """
     Return sizes in the specified data unit.
     """
-    Logger().verbose_print("Evaluating Size of files.", v_lvl=5, msg_type='info')
     # Default dict storying lines of code per file ext.
     size_per_language  = {}
     total_size = 0
@@ -195,7 +199,6 @@ def evaluate_sizes(path_to_project,
         file_name, file_ext = os.path.splitext(file)
 
         if file_ext in ext_set :
-            Logger().verbose_print("File: ", Path(file), v_lvl=5, msg_type='info')
             file_size = utils.get_size_for_file(file, data_unit)
             key = ext_lang_map[file_ext]
             if key in size_per_language.keys():

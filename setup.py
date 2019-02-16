@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='codestats',
+    name='codestatistics',
     version='0.1',
     description='''A command line tool to generate code statistics for a given directory.
     These statistics include

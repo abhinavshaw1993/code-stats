@@ -1,9 +1,9 @@
 import os
-import code_stat.bin.statistics as statistics
 import pytest
+import code_stats.bin.statistics as statistics
 
 from collections import Counter
-from code_stat.bin.logger import Logger
+from code_stats.bin.logger import Logger
 
 TEST_DIR = os.path.dirname(__file__)
 kTestingDataDir = os.path.join(TEST_DIR, 'testing_data')

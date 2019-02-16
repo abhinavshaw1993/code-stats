@@ -53,7 +53,7 @@ Give an example
 
 ## Authors
 
-**Abhinav Shaw** - *Initial work* - [PurpleBooth](https://github.com/abhinavshaw1993)
+**Abhinav Shaw** - *Initial work* - [Abhinav Shaw](https://github.com/abhinavshaw1993)
 
 
 ## License

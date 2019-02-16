@@ -2,19 +2,15 @@
 Module difining logging utils - verbose_print
 """
 import click
+import code_stats.definitions as definitions
 
-kTypeColorMap = {
-'info' : 'green',
-'warning' : 'red',
-'error' : 'red'
-}
+import code_stats.utils.validation_utils as validations
 
-def print_list(*args, msg_type):
-	if msg_type not in kTypeColorMap.keys():
-		return
+def print_message(*args, msg_type):
+	validations.validate_message_input(msg_type)
 
 	for element in args:
-		click.secho(str(element), fg=kTypeColorMap[msg_type])
+		click.secho(str(element), fg=definitions.kTypeColorMap[msg_type])
 
 """
 Implements singleton of logger.
@@ -28,8 +24,6 @@ class Borg:
 Logger class with bunch of logging functions.
 1. verbose_print() - Print when verbosity set to True, which is only set
 in the begining of the app.
-TODO(abhinav) - Iplement this.
-2. log(level) - Loggs at three levels, Info, Warning and Error.
 """
 class Logger(Borg):
 
@@ -45,6 +39,6 @@ class Logger(Borg):
             self.verbosity = verbose
             self.verbosity_level = verbosity_level
             if verbose:
-                self.verbose_print = lambda *a, v_lvl, msg_type : print_list(*a, msg_type=msg_type) if v_lvl <= self.verbosity_level else None
+                self.verbose_print = lambda *a, v_lvl, msg_type : print_message(*a, msg_type=msg_type) if v_lvl <= self.verbosity_level else None
             else:
                 self.verbose_print = lambda *a, v_lvl, msg_type : None

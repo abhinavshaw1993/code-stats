@@ -16,3 +16,9 @@ data_units = {
 "mb" : 1024*1024,
 "gb" : 1024*1024*1024
 }
+
+kTypeColorMap = {
+'info' : 'green',
+'warning' : 'red',
+'error' : 'red'
+}

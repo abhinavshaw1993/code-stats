@@ -1,8 +1,8 @@
 import os
 
-import code_stat.utils.conversion_utils as conversion_utils
-import code_stat.utils.files_and_folders_utils as files_and_folders_utils
-from code_stat.definitions import data_units
+import code_stats.utils.conversion_utils as conversion_utils
+import code_stats.utils.files_and_folders_utils as files_and_folders_utils
+from code_stats.definitions import data_units
 from pathlib import Path
 
 TEST_DIR = os.path.dirname(__file__)

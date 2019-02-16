@@ -6,12 +6,12 @@ import sys
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 sys.path.insert(1, os.path.join(sys.path[0], 'utils'))
 
-import code_stat.bin.statistics as statistics
-import code_stat.utils.conversion_utils as conversion_utils
-from code_stat.definitions import data_units
+import code_stats.bin.statistics as statistics
+import code_stats.utils.conversion_utils as conversion_utils
 from pathlib import Path
-from code_stat.bin.logger  import Logger
-from code_stat.definitions import USER_HOME
+from code_stats.definitions import data_units
+from code_stats.bin.logger  import Logger
+from code_stats.definitions import USER_HOME
 
 # Function to generate paths.
 def generate_path(path):

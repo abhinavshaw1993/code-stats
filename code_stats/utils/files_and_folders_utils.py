@@ -5,7 +5,7 @@ import os
 import copy
 from collections import deque
 
-from code_stat.definitions import data_units
+from code_stats.definitions import data_units
 
 def get_total_line_for_file(path_to_file, ignore_blank_lines=False):
     """

@@ -1,4 +1,4 @@
-from code_stat.bin.logger import Logger
+from code_stats.bin.logger import Logger
 
 def convert_dict_to_list(dictionary):
     """
