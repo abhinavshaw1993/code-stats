@@ -155,7 +155,7 @@ def evaluate_lines_of_code(path_to_project,
             try:
                 line_count = utils.get_total_line_for_file(file, ignore_blank_lines)
             except UnicodeDecodeError:
-                Logger().verbose_print("Skipping File: {} becaus of UnicodeDevoceError. \n".format(file),
+                Logger().verbose_print("Skipping File: {} becaus of UnicodeDecodeError. \n".format(file),
                  v_lvl=5, msg_type='error')
 
             lines_of_code_per_language[ext_lang_map[file_ext]] += line_count

@@ -2,7 +2,7 @@ import yaml
 import os
 import sys
 
-from code_stat.definitions import ROOT_DIR
+from code_stats.definitions import ROOT_DIR
 
 def read_yaml(file_path):
     """Util to read Yaml File."""
