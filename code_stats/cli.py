@@ -65,7 +65,7 @@ def generate_code_statistics(path, du, ignore_blank_lines, ignore_extensions, ve
 
     ignore_extensions = conversion_utils.convert_csv_to_list(ignore_extensions)
 
-    Logger().verbose_print("Directory to read at {}".format(path),
+    Logger().verbose_print("Directory to read is at {}".format(path),
                             v_lvl=0, msg_type='info')
     statistics.generate_and_print_stats(path_to_project=path,
                                         ignore_blank_lines=ignore_blank_lines,

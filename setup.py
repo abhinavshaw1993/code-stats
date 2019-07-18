@@ -28,6 +28,7 @@ setup(
             "Programming Language :: Python :: 3",
             "Operating System :: POSIX :: Linux"
                     ],
+    package_data={'code_stats': ['data/*', 'tests/testing_data/*']},
     include_package_data=True,
     zip_safe=False,
     setup_cfg=True
