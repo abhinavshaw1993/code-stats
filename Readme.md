@@ -6,9 +6,9 @@ Code Stat is a command line tool to generate code statistics for a given directo
 
 These statistics include
 
-  1. Total lines of code per file extension.
-  2. Percentage wise break-up of different file extensions.
-  3. Space occupied by each file extension.
+  1. Total lines of code per file Type / Language.
+  2. Percentage wise break-up of different file Type / Language.
+  3. Space occupied by each file Type / Language.
 
 
 ## Getting Started
@@ -54,15 +54,20 @@ After installing -
 codestats --path=path/to/folder
 ```
 
-1. You can exclude files by ignoring extensions using the **--ignore_extensions** argument which accepts comma separated extensions.
+2. You can exclude files by ignoring extensions using the **--ignore_extensions** argument which accepts comma separated extensions.
 ```
 codestats --path=path/to/folder --ignore_extensions=csv,json,etc
 ```
 
-1. You can see options available in codestats as codestats by
+3. You can see options available in codestats as codestats by
 ```
 codestats --help
 ```
+
+Sample example in Linux.
+
+![codestats](./code_stats/data/codestats_sample.png)
+
 
 ## Running the tests
 
@@ -90,4 +95,4 @@ pytest ./code_stats
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.txt) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.txt) file for details
