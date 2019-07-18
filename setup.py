@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='code-stats',
-    version='0.1',
+    version='0.1.1',
     description='''A command line tool to generate code statistics for a given directory.
-    These statistics include\n
-    1. Total Lines of Code.\n
+    These statistics include
+    1. Total Lines of Code.
     2. Percentage wise break up of different languages used.''',
     author='Abhinav Shaw',
     author_email='abhinav.shaw1993@gmail.com',
@@ -15,7 +15,6 @@ setup(
         'pathlib',
     ],
     keywords = ['Code statistics', 'lines of code', 'loc'],
-    ,
     setup_requires=[
         "pytest-runner",
     ],

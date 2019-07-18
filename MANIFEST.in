@@ -1,1 +1,2 @@
 include code_stats/data/*
+include code_stats/tests/testing_data/*
