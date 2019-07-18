@@ -14,6 +14,8 @@ setup(
         'click',
         'pathlib',
     ],
+    keywords = ['Code statistics', 'lines of code', 'loc'],
+    ,
     setup_requires=[
         "pytest-runner",
     ],
