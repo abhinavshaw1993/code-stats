@@ -13,6 +13,7 @@ setup(
     install_requires=[
         'click',
         'pathlib',
+        'tabulate'
     ],
     keywords = ['Code statistics', 'lines of code', 'loc'],
     setup_requires=[
