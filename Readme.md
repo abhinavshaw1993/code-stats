@@ -1,4 +1,4 @@
-# codestat
+# codestat [![Build Status](https://travis-ci.org/lyft/flyteadmin.svg?branch=master)](https://travis-ci.org/lyft/flyteadmin)
 
 Code Stat is a command line tool to generate code statistics for a given directory.
 
