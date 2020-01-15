@@ -1,4 +1,4 @@
-# codestat
+# codestat [![Build Status](https://travis-ci.org/lyft/flyteadmin.svg?branch=master)](https://travis-ci.org/lyft/flyteadmin)
 
 Code Stat is a command line tool to generate code statistics for a given directory.
 
@@ -26,11 +26,7 @@ codestats requires python 3 and the following packages to work.
 
 #### Installing Dependencies
 
-1. click - `pip install click` or `conda install click`.
-2. pathlib - `pip install pathlib` or `conda install pathlib`.
-3. tabulate - `pip install tabulate` or `conda install tabulate`.
-4. pytest - `pip install -U pytest` or `conda install -c anaconda pytest`.
-
+`pip install -r requirements.txt` from the source code of the project.
 
 ### Installing codestats
 

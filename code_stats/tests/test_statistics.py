@@ -83,5 +83,7 @@ def test_generate_stats(setup_logger):
                     ['Total', 18, 100.0, 405.0]]
 
     header, output = statistics.generate_stats(kTestingDataDir)
+    print(output)
+
+    assert all([True if row in output else False for row in actual_output])
     assert actual_header == actual_header
-    assert actual_output == output
