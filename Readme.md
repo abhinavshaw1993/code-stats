@@ -26,11 +26,7 @@ codestats requires python 3 and the following packages to work.
 
 #### Installing Dependencies
 
-1. click - `pip install click` or `conda install click`.
-2. pathlib - `pip install pathlib` or `conda install pathlib`.
-3. tabulate - `pip install tabulate` or `conda install tabulate`.
-4. pytest - `pip install -U pytest` or `conda install -c anaconda pytest`.
-
+`pip install -r requirements.txt` from the source code of the project.
 
 ### Installing codestats
 
