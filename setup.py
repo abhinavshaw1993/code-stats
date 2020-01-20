@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='code-stats',
-    version='0.1.3',
+    version='0.1.4',
     description='''A command line tool to generate code statistics for a given directory.
     These statistics include
     1. Total Lines of Code.
@@ -10,6 +10,7 @@ setup(
     author='Abhinav Shaw',
     author_email='abhinav.shaw1993@gmail.com',
     packages=find_packages(),
+    python_requires='>3.7',
     install_requires=[
         'click>=7.0,<8.0',
         'pathlib>=1.0.1,<2.0',
